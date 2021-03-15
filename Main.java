@@ -47,8 +47,11 @@ public class Main {
         Scanner inputNum = new Scanner(System.in);
         int num = inputNum.nextInt();
 
+        String numVal = num % 3 == 0 && num % 5 == 0 ? "FizzBuzz" : num % 5 == 0 || num % 10 == 0 ? "Fizz" : num % 3 == 0 ? "Buzz" : "same num";
+        System.out.println(numVal);
+
         //Step 2: Evaluate conditions
-        if (num % 3 == 0 && num % 5 == 0)
+        /*if (num % 3 == 0 && num % 5 == 0)
             System.out.println("FizzBuzz");
         else if (num % 5 == 0 || num % 10 == 0)
             System.out.println("Fizz");
@@ -56,6 +59,8 @@ public class Main {
             System.out.println("Buzz");
         else
             System.out.println(num);
+    } */
+
     }
 
 }

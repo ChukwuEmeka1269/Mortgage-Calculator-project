@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //This program calculates the monthly payment to be made on a principal amount
+        /*//This program calculates the monthly payment to be made on a principal amount
         //The Mortgage Calculator
 
         //Step 1: variable declaration and initialization
@@ -33,11 +33,35 @@ public class Main {
         //Step 4: Calculate Mortgage monthly payment
         double mortgage = principal * ((monthlyInterest * (Math.pow(1 + monthlyInterest, numberOfPayments))) / ((Math.pow(1 + monthlyInterest, numberOfPayments) - 1)));
         String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Your monthly mortgage payment is: " + mortgageFormatted);
+        System.out.println("Your monthly mortgage payment is: " + mortgageFormatted); */
 
+        //FizzBuzz Challenge
+        //If number is divisible by 5 print Fizz
+        //If number is divisible by 10 print Fizz
+        //if number is divisible by 3 print Buzz
+        //if number is divisible by 5 and 3 print FizzBuzz
+        //if number is not divisible by 5 or 3 print the number
 
+        //Step 1: Input desired integer
+        System.out.print("Enter Number: ");
+        Scanner inputNum = new Scanner(System.in);
+        int num = inputNum.nextInt();
 
+        //First Solution: Using ternary condition
+        String numVal = num % 3 == 0 && num % 5 == 0 ? "FizzBuzz" : num % 5 == 0 || num % 10 == 0 ? "Fizz" : num % 3 == 0 ? "Buzz" : "same num";
+        System.out.println(numVal);
 
+        //Second Solution: Using else if statements
+        if (num % 3 == 0 && num % 5 == 0)
+            System.out.println("FizzBuzz");
+        else if (num % 5 == 0 || num % 10 == 0)
+            System.out.println("Fizz");
+        else if (num % 3 == 0)
+            System.out.println("Buzz");
+        else
+            System.out.println(num);
+    }
 
     }
+
 }

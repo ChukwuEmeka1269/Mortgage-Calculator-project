@@ -1,67 +1,73 @@
 package com.emekafirstjavaprogram;
 
 
-
 import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        /*//This program calculates the monthly payment to be made on a principal amount
-        //The Mortgage Calculator
-
-        //Step 1: variable declaration and initialization
+        //Mortgage Calculator program: Modified.
+        //Step 1: Initialize Constant Variables
         final byte MONTHS_IN_YEAR = 12;
         final byte PERCENT = 100;
 
-        //Step 2: Call Scanner class to read in inputs
+        //Step 2: Prompt to input value
+
         Scanner readVal = new Scanner(System.in);
+        int principal ;
+        while(true){
+            System.out.print("Principal: ");
+            principal = readVal.nextInt();
 
-        //Step 3: Input mortgage variables
-        System.out.print("Principal: ");
-        int principal = readVal.nextInt();
+            if (principal < 1000)
+                System.out.println("Enter a number between 1000 and 1,000,000");
+            if (principal >= 1000 && principal <= 1000000)
+                break;
+        }
 
-        System.out.print("Annual Interest: ");
-        float annualInterest = readVal.nextFloat();
-        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        //prompt and read in the annual interest rate value
 
-        System.out.print("Period(Year): ");
-        byte period = readVal.nextByte();
-        int numberOfPayments = period * MONTHS_IN_YEAR;
 
-        //Step 4: Calculate Mortgage monthly payment
-        double mortgage = principal * ((monthlyInterest * (Math.pow(1 + monthlyInterest, numberOfPayments))) / ((Math.pow(1 + monthlyInterest, numberOfPayments) - 1)));
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Your monthly mortgage payment is: " + mortgageFormatted); */
+        double annualInterest;
+        while(true){
+            System.out.print("Annual Interest: ");
+            annualInterest = readVal.nextDouble();
+            if(annualInterest <= 0)
+                System.out.println("Enter a value greater than 0 and less than or equal to 30");
+            if(annualInterest > 0 && annualInterest <= 30)
+                break;
 
-        //FizzBuzz Challenge
-        //If number is divisible by 5 print Fizz
-        //If number is divisible by 10 print Fizz
-        //if number is divisible by 3 print Buzz
-        //if number is divisible by 5 and 3 print FizzBuzz
-        //if number is not divisible by 5 or 3 print the number
+        }
 
-        //Step 1: Input desired integer
-        System.out.print("Enter Number: ");
-        Scanner inputNum = new Scanner(System.in);
-        int num = inputNum.nextInt();
+        //Calculate monthly interest
+        double monInt = annualInterest / MONTHS_IN_YEAR / PERCENT;
 
-        //First Solution: Using ternary condition
-        String numVal = num % 3 == 0 && num % 5 == 0 ? "FizzBuzz" : num % 5 == 0 || num % 10 == 0 ? "Fizz" : num % 3 == 0 ? "Buzz" : "same num";
-        System.out.println(numVal);
+        //prompt and read in the period
+        byte period;
+        int numPay;
+        while(true) {
+            System.out.print("Period(Years): ");
+            period = readVal.nextByte();
+            if(period == 0)
+                System.out.println("Enter a value between 1 and 30");
+            if(period > 0 && period <= 30)
+                break;
 
-        //Second Solution: Using else if statements
-        if (num % 3 == 0 && num % 5 == 0)
-            System.out.println("FizzBuzz");
-        else if (num % 5 == 0 || num % 10 == 0)
-            System.out.println("Fizz");
-        else if (num % 3 == 0)
-            System.out.println("Buzz");
-        else
-            System.out.println(num);
+        }
+            numPay = period * MONTHS_IN_YEAR;
+
+
+
+        //calculate Mortgage monthly payments
+        double mortgage = principal * ((monInt * Math.pow(1 + monInt, numPay) / (Math.pow(1 + monInt, numPay) - 1)));
+        String mortFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
+        System.out.println(mortFormatted);
+
+
     }
-
-    }
-
 }
+
+
+
+

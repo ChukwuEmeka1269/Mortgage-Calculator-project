@@ -7,66 +7,64 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        //Mortgage Calculator program: Modified.
-        //Step 1: Initialize Constant Variables
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
 
-        //Step 2: Prompt to input value
+        //Call the readNumber Class to read in values
+        int principal = (int) readNumber("Principal: ", 1000, 1_000_000);
+        float annualInterest = (float) readNumber("Annual Interest: ", 1, 30);
+        byte period = (byte) readNumber("Period(year): ", 1, 30);
 
-        Scanner readVal = new Scanner(System.in);
-        int principal ;
-        while(true){
-            System.out.print("Principal: ");
-            principal = readVal.nextInt();
+        //Calculate the Mortgage by calling the calculateMortgage method
+        double mortgage = calculateMortgage(principal, annualInterest, period);
 
-            if (principal < 1000)
-                System.out.println("Enter a number between 1000 and 1,000,000");
-            if (principal >= 1000 && principal <= 1000000)
-                break;
-        }
-
-        //prompt and read in the annual interest rate value
-
-
-        double annualInterest;
-        while(true){
-            System.out.print("Annual Interest: ");
-            annualInterest = readVal.nextDouble();
-            if(annualInterest <= 0)
-                System.out.println("Enter a value greater than 0 and less than or equal to 30");
-            if(annualInterest > 0 && annualInterest <= 30)
-                break;
-
-        }
-
-        //Calculate monthly interest
-        double monInt = annualInterest / MONTHS_IN_YEAR / PERCENT;
-
-        //prompt and read in the period
-        byte period;
-        int numPay;
-        while(true) {
-            System.out.print("Period(Years): ");
-            period = readVal.nextByte();
-            if(period == 0)
-                System.out.println("Enter a value between 1 and 30");
-            if(period > 0 && period <= 30)
-                break;
-
-        }
-            numPay = period * MONTHS_IN_YEAR;
-
-
-
-        //calculate Mortgage monthly payments
-        double mortgage = principal * ((monInt * Math.pow(1 + monInt, numPay) / (Math.pow(1 + monInt, numPay) - 1)));
-        String mortFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println(mortFormatted);
+        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
+        System.out.println("Your monthly mortgage is: " + mortgageFormatted);
 
 
     }
+
+    public static double readNumber(String prompt, double min, double max) {
+        Scanner scanner = new Scanner(System.in);
+        double value;
+
+        while(true){
+            System.out.print(prompt);
+            value = scanner.nextDouble();
+            if(value >= min && value <= max)
+                break;
+            System.out.println("Enter a number between " + min + " and" + " " + max);
+        }
+
+        return value;
+    }
+
+
+    public static double calculateMortgage(
+            int principal,
+            float annualInterest,
+            byte period) {
+
+        final byte MONTHS_IN_YEAR = 12;
+        final byte PERCENT = 100;
+
+        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        short numOfPay = (short)(period * MONTHS_IN_YEAR);
+
+        return principal *
+                ((monthlyInterest * (Math.pow(1 + monthlyInterest, numOfPay))
+                        /(Math.pow(1 + monthlyInterest, numOfPay) - 1)));
+
+    }
+
 }
+
+/* Summary of this program:
+The program calculates the monthly mortgage payment for a principal loan collected at an annual interest for some period of years.
+Two methods created:
+1. readNumber method created to accepted valid inputs
+2. calculateMortgage method to calculate the monthly mortgage payment.
+
+The two methods are called in to the main class to execute the valid inputs provided
+ */
 
 
 

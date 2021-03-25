@@ -2,42 +2,52 @@ package com.emekafirstjavaprogram;
 
 
 
-import java.text.NumberFormat;
 import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        //This program calculates the monthly payment to be made on a principal amount
-        //The Mortgage Calculator
+        //This program accepts 2 integers from users
+        //Computes the sum, product, difference and quotient
 
-        //Step 1: variable declaration and initialization
-        final byte MONTHS_IN_YEAR = 12;
-        final byte PERCENT = 100;
+        int number1;//declare first number
+        int number2; //declared second number
+        int sum;
+        int product;
+        int difference;
+        int quotient;
 
-        //Step 2: Call Scanner class to read in inputs
-        Scanner readVal = new Scanner(System.in);
+        Scanner input = new Scanner(System.in);//Calling the Scanner class
+        System.out.print("First NUmber: ");//prompt user
+        number1 = input.nextInt();//read in the first value
 
-        //Step 3: Input mortgage variables
-        System.out.print("Principal: ");
-        int principal = readVal.nextInt();
+        System.out.print("Second Number: ");//prompt user
+        number2 = input.nextInt(); //read in the second value
 
-        System.out.print("Annual Interest: ");
-        float annualInterest = readVal.nextFloat();
-        float monthlyInterest = annualInterest / PERCENT / MONTHS_IN_YEAR;
+        //Start computation of sum
+        System.out.printf("Sum is: %d", sum = number1 + number2);
 
-        System.out.print("Period(Year): ");
-        byte period = readVal.nextByte();
-        int numberOfPayments = period * MONTHS_IN_YEAR;
+        //compute product
+        System.out.printf("\nProduct is: %d ", product = number1 * number2);
 
-        //Step 4: Calculate Mortgage monthly payment
-        double mortgage = principal * ((monthlyInterest * (Math.pow(1 + monthlyInterest, numberOfPayments))) / ((Math.pow(1 + monthlyInterest, numberOfPayments) - 1)));
-        String mortgageFormatted = NumberFormat.getCurrencyInstance().format(mortgage);
-        System.out.println("Your monthly mortgage payment is: " + mortgageFormatted);
+        //compute difference
+        System.out.printf("\nDifference is: %d ", difference = (number2 - number1));
+
+        //compute quotient
+        System.out.printf("\nQuotient is: %d", quotient = number1 % number2);
+
+
+
+
 
 
 
 
 
     }
+
 }
+
+
+
+
